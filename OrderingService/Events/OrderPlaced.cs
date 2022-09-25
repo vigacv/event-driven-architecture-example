@@ -8,6 +8,6 @@ namespace OrderingService.Events
 {
     public class OrderPlaced: INotification
     {
-        Guid OrderId { get; set; }
+        public Guid OrderId { get; set; }
     }
 }
