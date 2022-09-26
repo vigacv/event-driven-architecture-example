@@ -454,3 +454,4 @@ $RECYCLE.BIN/
 !.vscode/launch.json
 !.vscode/extensions.json
 OrderingService/appsettings.json
+BillingService/appsettings.json
