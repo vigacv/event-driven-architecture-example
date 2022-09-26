@@ -18,7 +18,8 @@ namespace OrderingService.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok();
+            var orders = await _mediator.Send(new GetOrders());
+            return Ok(orders);
         }
 
         [HttpPost("CreateOrder")]

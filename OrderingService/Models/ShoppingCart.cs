@@ -7,7 +7,6 @@ namespace OrderingService.Models
 {
     public class ShoppingCart
     {
-        public string Id { get; set; }
         public string CustomerId { get; set; }
         public List<ShoppingCartItem> Items { get; set; }
     }

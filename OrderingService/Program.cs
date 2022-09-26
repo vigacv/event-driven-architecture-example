@@ -1,6 +1,7 @@
 using MediatR;
 using OrderingService.Commands;
 using OrderingService.Models;
+using OrderingService.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(new System.Reflection.Assembly[] { typeof(CreateOrderHandler).Assembly });
 
 builder.Services.Configure<ServiceBusSettings>(builder.Configuration.GetSection("ServiceBus"));
+builder.Services.AddSingleton<IOrderRepository, OrderRepository>();
 
 var app = builder.Build();
 
