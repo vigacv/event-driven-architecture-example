@@ -14,6 +14,13 @@ namespace BillingService.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var orderBills = await _mediator.Send(new GetOrderBills());
+            return Ok(orderBills);
+        }
+
         [HttpPost("StorePaymentDetails")]
         public async Task<IActionResult> StorePaymentDetails(StorePaymentDetailsForOrder command)
         {

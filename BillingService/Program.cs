@@ -1,6 +1,7 @@
 using BillingService.Commands;
 using BillingService.Interfaces;
 using BillingService.Models;
+using BillingService.Repository;
 using BillingService.Services;
 using MediatR;
 
@@ -18,6 +19,7 @@ builder.Services.Configure<ServiceBusSettings>(builder.Configuration.GetSection(
 
 builder.Services.AddSingleton<IServiceBusConsumer, ServiceBusConsumer>();
 builder.Services.AddSingleton<IProcessData, ProcessData>();
+builder.Services.AddSingleton<IBillingRepository, BillingRepository>();
 
 var app = builder.Build();
 
