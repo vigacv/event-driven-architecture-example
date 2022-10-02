@@ -22,7 +22,7 @@ namespace BillingService.Controllers
         }
 
         [HttpPost("StorePaymentDetails")]
-        public async Task<IActionResult> StorePaymentDetails(StorePaymentDetailsForOrder command)
+        public async Task<IActionResult> StorePaymentDetails([FromBody] StorePaymentDetailsForOrder command)
         {
             await _mediator.Send(command);
             return Ok();
