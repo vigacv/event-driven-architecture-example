@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingService", "Ordering
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingService", "BillingService\BillingService.csproj", "{F18F1763-443E-4E68-8DAE-739B37C7F952}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippingService", "ShippingService\ShippingService.csproj", "{693D9282-50A8-4CC3-B71C-9B5B1E3A04D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{F18F1763-443E-4E68-8DAE-739B37C7F952}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F18F1763-443E-4E68-8DAE-739B37C7F952}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F18F1763-443E-4E68-8DAE-739B37C7F952}.Release|Any CPU.Build.0 = Release|Any CPU
+		{693D9282-50A8-4CC3-B71C-9B5B1E3A04D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{693D9282-50A8-4CC3-B71C-9B5B1E3A04D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{693D9282-50A8-4CC3-B71C-9B5B1E3A04D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{693D9282-50A8-4CC3-B71C-9B5B1E3A04D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

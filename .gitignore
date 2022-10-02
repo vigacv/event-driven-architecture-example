@@ -455,3 +455,8 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 OrderingService/appsettings.json
 BillingService/appsettings.json
+BillingService/.config/dotnet-tools.json
+BillingService/Properties/ServiceDependencies/billing-eda-example - Web Deploy/profile.arm.json
+ShippingService/appsettings.json
+OrderingService/Properties/ServiceDependencies/ordering-eda-example - Web Deploy/profile.arm.json
+ShippingService/Properties/launchSettings.json
