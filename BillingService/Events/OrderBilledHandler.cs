@@ -21,7 +21,7 @@ namespace BillingService.Events
         public async Task Handle(OrderBilled notification, CancellationToken cancellationToken)
         {
             var client = new ServiceBusClient(_serviceBusSettings.ConnectionString);
-            var sender = client.CreateSender(_serviceBusSettings.TopicName);
+            var sender = client.CreateSender(_serviceBusSettings.PublishTopic);
 
             using ServiceBusMessageBatch messageBatch = await sender.CreateMessageBatchAsync();
 

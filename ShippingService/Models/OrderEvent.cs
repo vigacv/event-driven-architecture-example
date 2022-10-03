@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BillingService.Models
+namespace ShippingService.Models
 {
     public class OrderEvent
     {

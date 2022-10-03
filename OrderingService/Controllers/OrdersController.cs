@@ -23,7 +23,7 @@ namespace OrderingService.Controllers
         }
 
         [HttpPost("CreateOrder")]
-        public async Task<IActionResult> CreateOrder(ShoppingCart shoppingCart)
+        public async Task<IActionResult> CreateOrder([FromBody] ShoppingCart shoppingCart)
         {
             var result = await _mediator.Send(new CreateOrder { OrderId = Guid.NewGuid(), ShoppingCart = shoppingCart });
             return Ok(result);

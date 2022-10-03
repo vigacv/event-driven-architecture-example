@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Azure.Messaging.ServiceBus;
-using BillingService.Interfaces;
-using BillingService.Models;
 using Microsoft.Extensions.Options;
+using ShippingService.Interfaces;
+using ShippingService.Models;
 
-namespace BillingService.Services
+namespace ShippingService.Services
 {
-    public class ServiceBusConsumer : IServiceBusConsumer
+    public class ServiceBusConsumer: IServiceBusConsumer
     {
         private readonly IProcessData _processData;
         private readonly ServiceBusClient _client;
         private readonly ServiceBusSettings _serviceBusSettings;
         private readonly ILogger _logger;
-        private ServiceBusProcessor _processor;
+        private List<ServiceBusProcessor> _processors = new List<ServiceBusProcessor>();
 
         public ServiceBusConsumer(IProcessData processData,
             IOptions<ServiceBusSettings> serviceBusSettings,
@@ -37,10 +37,14 @@ namespace BillingService.Services
                 AutoCompleteMessages = false,
             };
 
-            _processor = _client.CreateProcessor(_serviceBusSettings.ConsumeTopic, _serviceBusSettings.Subscription ,_serviceBusProcessorOptions);
-            _processor.ProcessMessageAsync += ProcessMessagesAsync;
-            _processor.ProcessErrorAsync += ProcessErrorAsync;
-            await _processor.StartProcessingAsync().ConfigureAwait(false);
+            foreach (var consumer in _serviceBusSettings.Consumers)
+            {
+                var processor = _client.CreateProcessor(consumer.Topic, consumer.Subscription, _serviceBusProcessorOptions);
+                processor.ProcessMessageAsync += ProcessMessagesAsync;
+                processor.ProcessErrorAsync += ProcessErrorAsync;
+                await processor.StartProcessingAsync().ConfigureAwait(false);
+                _processors.Add(processor);
+            }
         }
 
         private Task ProcessErrorAsync(ProcessErrorEventArgs arg)
@@ -63,9 +67,12 @@ namespace BillingService.Services
 
         public async ValueTask DisposeAsync()
         {
-            if (_processor != null)
+            if (_processors != null && _processors.Any())
             {
-                await _processor.DisposeAsync().ConfigureAwait(false);
+                foreach (var processor in _processors)
+                {
+                    await processor.DisposeAsync().ConfigureAwait(false);
+                }
             }
 
             if (_client != null)
@@ -76,7 +83,13 @@ namespace BillingService.Services
 
         public async Task CloseQueueAsync()
         {
-            await _processor.CloseAsync().ConfigureAwait(false);
+            if (_processors != null && _processors.Any())
+            {
+                foreach (var processor in _processors)
+                {
+                    await processor.StopProcessingAsync().ConfigureAwait(false);
+                }
+            }
         }
     }
 }

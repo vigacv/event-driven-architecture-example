@@ -9,5 +9,18 @@ namespace ShippingService.Models
     {
         public Guid OrderId { get; set; }
         public Address ShippingAddress { get; set; }
+        public bool IsOrdered { get; private set; } = false;
+        public bool IsBilled { get; private set; } = false;
+        public bool IsShipped { get; private set; } = false;
+
+        public void SetBilled(){
+            IsBilled = true;
+            IsShipped = IsBilled && IsOrdered;
+        }
+
+        public void SetOrdered(){
+            IsOrdered = true;
+            IsShipped = IsBilled && IsOrdered;
+        }
     }
 }
